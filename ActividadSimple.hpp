@@ -5,7 +5,7 @@
 class ActividadSimple : public Actividad
 {	
 	public: 
-		Actividad(std::string responsable, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
+		ActividadSimple(std::string responsable, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
               	std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion, Actividad* padre)
 		{ 
 			this->responsable = responsable;
@@ -17,7 +17,7 @@ class ActividadSimple : public Actividad
 			this->padre = padre;
 		}
 		
-		~Actividad()
+		~ActividadSimple()
 		{
 			this->padre = nullptr;
 		}
