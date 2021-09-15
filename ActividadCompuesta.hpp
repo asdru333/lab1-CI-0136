@@ -30,13 +30,18 @@ class ActividadCompuestas : public Actividad
 
 		virtual void calcularFechas()
 		{
-		/*
 			if (this->hijos.size() > 0)
 			{
-				this->fechaPlanteadaInicio = this->obtenerFechaMinima();
-				this->fechaPlanteadaFinal = this->obtenerFechaMaxima();
+				std::string fechaCandidataInicio = this->hijos[0]; 
+				std::string fechaCandidataFinal = this->hijos[0]; 
+				for (int index = 1; index < hijos.size(); ++index)
+				{
+					fechaCandidataInicio = this->calcularFecha(fechaCandidataInicio, this->hijos[index], -1);
+					fechaCandidataFinal = this->calcularFecha(fechaCandidataFinal, this->hijos[index], 1);
+				}
+				this->fechaPlanteadaInicio = fechaCandidataInicio;
+				this->fechaPlanteadaFinal = fechaCandidataFinal
 			}
-		*/
 		}
 
 		virtual void add(Actividad* nuevoHijo)
@@ -58,21 +63,31 @@ class ActividadCompuestas : public Actividad
 		}
 		
 	private:
-	/*
-		obtenerFechaMinima()
+		std::string calcularFecha(std::string fechaActual, std::string fechaCandidata, int signo)
 		{
-			string fechaMinima;
-			for (int iterator = 0; iterator < this->hijos; ++iterator)
+			std:string fecha1, fecha2;
+			int index = fechaActual.size()-1;
+			while(index >= 0)
 			{
-				obtenerNum
-				fechaMinima = 
+				if (fechaActual[index] != '/')
+				{
+					fecha1.insert(0, fechaActual.substr(index, 1));
+					fecha2.insert(0, fechaCandidata(index, 1));
+				}
+				else
+				{
+					if ((stoi(fecha1) - stoi(fecha2))*signo > 0)
+					{
+						return fechaCandidata;
+					}
+					else
+					{
+						fecha1.clear();
+						fecha2.clear();
+					}
+				}
+				--index;
 			}
-		}
-		
-		obtenerFechaMaxima()
-		{
-			this->
-		}
-	*/
-		
+			return fechaActual;
+		}	
 };
