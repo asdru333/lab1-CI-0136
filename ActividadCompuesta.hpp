@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "Actividad.hpp"
+#include "Tipo.hpp"
 
 class ActividadCompuesta : public Actividad
 {
@@ -36,7 +38,12 @@ class ActividadCompuesta : public Actividad
 			this->padre = nullptr;
 			this->hijos.empty();
 		}
-
+		
+		std::vector<Actividad*> getHijo()
+		{
+		    return this->hijos;
+		}
+		
 		virtual void calcularFechas()
 		{
 			if (this->hijos.size() > 0)
