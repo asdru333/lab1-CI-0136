@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Actividad.hpp"
+#include "Tipo.hpp"
 
 class ActividadSimple : public Actividad
 {	
