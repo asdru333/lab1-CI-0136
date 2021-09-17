@@ -36,10 +36,10 @@ class Tipo
 	
 		Tipo* getHijo()
 		{
-			return this->padre;
+			return this->hijo;
 		}
 		void setHijo(Tipo* nuevoHijo)
 		{
-			this->padre = nuevoHijo;
+			this->hijo = nuevoHijo;
 		}
 };
