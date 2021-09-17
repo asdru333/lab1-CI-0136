@@ -8,7 +8,7 @@ class Actividad
 {
 	protected:
 		Actividad* padre;
-		//Tipo* tipos
+		Tipo* tipo;
 		std::string responsable; 
 		std::string fechaPlanteadaInicio;
 		std::string fechaPlanteadaFinal;
@@ -24,6 +24,14 @@ class Actividad
 		void setPadre(Actividad* nuevoPadre)
 		{
 			this->padre = nuevoPadre;
+		}
+		Tipo* getTipo()
+		{
+		    return this->tipo;
+		}
+		void setTipo(Tipo* nuevoTipo)
+		{
+		    this->tipo = nuevoTipo;
 		}
 		std::string getResponsable()
 		{
