@@ -4,10 +4,10 @@
 #include <iostream>
 #include <vector>
 
-class ActividadCompuestas : public Actividad
+class ActividadCompuesta : public Actividad
 {
 	protected:
-    	vector<Actividad*> hijos;
+    		std::vector<Actividad*> hijos;
 		
 	public:
 		ActividadCompuesta(std::string responsable, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, std::string fechaRealInicio, 
@@ -51,7 +51,7 @@ class ActividadCompuestas : public Actividad
 
 		virtual void remove(Actividad* noHijo)
 		{
-			std::vector<int>::iterator iterator = this->hijos.begin();
+			std::vector<Actividad*>::iterator iterator = this->hijos.begin();
 			while (*iterator != noHijo and iterator != this->hijos.end())
 			{
 				++iterator;
@@ -65,14 +65,14 @@ class ActividadCompuestas : public Actividad
 	private:
 		std::string calcularFecha(std::string fechaActual, std::string fechaCandidata, int signo)
 		{
-			std:string fecha1, fecha2;
+			std::string fecha1, fecha2;
 			int index = fechaActual.size()-1;
 			while(index >= 0)
 			{
 				if (fechaActual[index] != '/')
 				{
 					fecha1.insert(0, fechaActual.substr(index, 1));
-					fecha2.insert(0, fechaCandidata(index, 1));
+					fecha2.insert(0, fechaCandidata.substr(index, 1));
 				}
 				else
 				{
