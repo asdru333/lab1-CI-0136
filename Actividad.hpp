@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "Tipo.hpp"
 
 class Actividad
 {
