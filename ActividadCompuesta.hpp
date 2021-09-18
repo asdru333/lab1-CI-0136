@@ -12,11 +12,10 @@ class ActividadCompuesta : public Actividad
     		std::vector<Actividad*> hijos;
 		
 	public:
-		ActividadCompuesta(std::string responsable, Tipo* tipo, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, std::string fechaRealInicio, 
-						  std::string fechaRealFinalizacion, std::string descripcion)
+		ActividadCompuesta(std::string responsable, Tipo* tipo, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
+		std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion)
 		{ 
-		    
-		    if ((!padre) or (tipo->getPadre()->getNombre() == padre->getTipo()->getNombre()))
+		    if (tipo->getHijo())
 		    {
     			this->responsable = responsable;
     			this->tipo = tipo;
@@ -29,7 +28,7 @@ class ActividadCompuesta : public Actividad
 		    }
 		    else
 		    {
-		        std::cout << "problemas con la jerarquía" << std::endl;
+		        std::cout << "Una actividad compuesta no puede contener el tipo más bajo de la jerarquía (que no tenga hijo)" << std::endl;
 		    }
 		}
 
