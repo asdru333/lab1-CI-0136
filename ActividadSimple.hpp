@@ -7,7 +7,7 @@ class ActividadSimple : public Actividad
 {	
 	public: 
 		ActividadSimple(std::string responsable, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
-              	std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion, Actividad* padre)
+              	std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion)
 		{ 
 		    
 		    if ((!padre and !tipo->getPadre()) or (tipo->getPadre()->getNombre() == padre->getTipo()->getNombre()))
@@ -19,7 +19,7 @@ class ActividadSimple : public Actividad
     			this->fechaRealInicio = fechaRealInicio;
     			this->fechaRealFinalizacion = fechaRealFinalizacion;
     			this->descripcion = descripcion;
-    			this->padre = padre;
+    			this->padre = nullptr;
 		    }
 		    else
 		    {
