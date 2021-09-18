@@ -1,3 +1,12 @@
+#include <cstdio>
+#include <string>
+#include <iostream>
+#include <vector>
+#include "Tipo.hpp"
+#include "Actividad.hpp"
+#include "ActividadSimple.hpp"
+#include "ActividadCompuesta.hpp"
+
 int main()
 {
     Tipo* proyecto = new Tipo("proyecto");
