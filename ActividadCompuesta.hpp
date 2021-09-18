@@ -63,14 +63,19 @@ class ActividadCompuesta : public Actividad
 		{
 			if (!nuevoHijo)
 				std::cout << "No se permiten agregar hijos nulos" << std::endl;
-			else if (nuevoHijo->getTipo()->getPadre()->getNombre() == this->tipo->getNombre() 
-			and nuevoHijo->getTipo()->getNombre() == this->tipo->getHijo()->getNombre())
+			else 
 			{
-				nuevoHijo->setPadre(this);
-				this->hijos.push_back(nuevoHijo);
+			    Tipo* elPadre = nuevoHijo->getTipo()->getPadre();
+			    Tipo* elHijo = this->tipo->getHijo();
+    			if (elHijo and elPadre and elPadre->getNombre() == this->tipo->getNombre() 
+    			and nuevoHijo->getTipo()->getNombre() == elHijo->getNombre())
+    			{
+    				nuevoHijo->setPadre(this);
+    				this->hijos.push_back(nuevoHijo);
+    			}
+			    else
+				    std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
 			}
-			else
-				std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
 		}
 
 		virtual void remove(Actividad* noHijo)
