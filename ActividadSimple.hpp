@@ -6,11 +6,11 @@
 class ActividadSimple : public Actividad
 {	
 	public: 
-		ActividadSimple(std::string responsable, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
-              	std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion)
+		ActividadSimple(std::string responsable, Tipo* tipo, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, 
+		std::string fechaRealInicio, std::string fechaRealFinalizacion, std::string descripcion)
 		{ 
 		    
-		    if ((!padre and !tipo->getPadre()) or (tipo->getPadre()->getNombre() == padre->getTipo()->getNombre()))
+		    if (!tipo->getHijo())
 		    {
     			this->responsable = responsable;
     			this->tipo = tipo;
@@ -23,7 +23,7 @@ class ActividadSimple : public Actividad
 		    }
 		    else
 		    {
-		        std::cout << "problemas con la jerarquía" << std::endl;
+		        std::cout << "La actividad simple debe ser la más baja de la jerarquía de tipos (el tipo asignado no puede tener hijo)" << std::endl;
 		    }
 		}
 		
