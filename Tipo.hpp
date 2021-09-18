@@ -16,6 +16,12 @@ class Tipo
 			this->hijo = hijo;
 		}
 	
+		~Tipo()
+		{
+			this->padre = nullptr;
+			this->hijo = nullptr;
+		}
+	
 		std::string getNombre()
 		{
 			return this->nombre;
