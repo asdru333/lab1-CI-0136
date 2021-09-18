@@ -13,7 +13,7 @@ class ActividadCompuesta : public Actividad
 		
 	public:
 		ActividadCompuesta(std::string responsable, Tipo* tipo, std::string fechaPlanteadaInicio, std::string fechaPlanteadaFinal, std::string fechaRealInicio, 
-						  std::string fechaRealFinalizacion, std::string descripcion, Actividad* padre)
+						  std::string fechaRealFinalizacion, std::string descripcion)
 		{ 
 		    
 		    if ((!padre) or (tipo->getPadre()->getNombre() == padre->getTipo()->getNombre()))
@@ -25,7 +25,7 @@ class ActividadCompuesta : public Actividad
     			this->fechaRealInicio = fechaRealInicio;
     			this->fechaRealFinalizacion = fechaRealFinalizacion;
     			this->descripcion = descripcion;
-    			this->padre = padre;
+    			this->padre = nullptr;
 		    }
 		    else
 		    {
@@ -39,7 +39,7 @@ class ActividadCompuesta : public Actividad
 			this->hijos.empty();
 		}
 		
-		std::vector<Actividad*> getHijo()
+		std::vector<Actividad*> getHijos()
 		{
 		    return this->hijos;
 		}
@@ -48,15 +48,15 @@ class ActividadCompuesta : public Actividad
 		{
 			if (this->hijos.size() > 0)
 			{
-				std::string fechaCandidataInicio = this->hijos[0]; 
-				std::string fechaCandidataFinal = this->hijos[0]; 
+				std::string fechaCandidataInicio = this->hijos[0]->getFechaPlanteadaInicio(); 
+				std::string fechaCandidataFinal = this->hijos[0]->getFechaPlanteadaFinal(); 
 				for (int index = 1; index < hijos.size(); ++index)
 				{
-					fechaCandidataInicio = this->calcularFecha(fechaCandidataInicio, this->hijos[index], -1);
-					fechaCandidataFinal = this->calcularFecha(fechaCandidataFinal, this->hijos[index], 1);
+					fechaCandidataInicio = this->calcularFecha(fechaCandidataInicio, this->hijos[index]->getFechaPlanteadaInicio(), 1);
+					fechaCandidataFinal = this->calcularFecha(fechaCandidataFinal, this->hijos[index]->getFechaPlanteadaFinal(), -1);
 				}
 				this->fechaPlanteadaInicio = fechaCandidataInicio;
-				this->fechaPlanteadaFinal = fechaCandidataFinal
+				this->fechaPlanteadaFinal = fechaCandidataFinal;
 			}
 		}
 
@@ -71,9 +71,7 @@ class ActividadCompuesta : public Actividad
 				this->hijos.push_back(nuevoHijo);
 			}
 			else
-			{
 				std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
-			}
 		}
 
 		virtual void remove(Actividad* noHijo)
@@ -85,6 +83,7 @@ class ActividadCompuesta : public Actividad
 			}
 			if (iterator != this->hijos.end())
 			{
+			    noHijo->setPadre(nullptr);
 				this->hijos.erase(iterator);
 			}
 		}
@@ -103,9 +102,13 @@ class ActividadCompuesta : public Actividad
 				}
 				else
 				{
-					if ((stoi(fecha1) - stoi(fecha2))*signo > 0)
+				    int resultado = (stoi(fecha1) - stoi(fecha2))*signo;
+					if (resultado != 0)
 					{
-						return fechaCandidata;
+					    if (resultado > 0)
+						    return fechaCandidata;
+						else
+						   return fechaActual;
 					}
 					else
 					{
