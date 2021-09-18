@@ -24,7 +24,7 @@ class Actividad
 		}
 		void setPadre(Actividad* nuevoPadre)
 		{
-			if ((nuevoPadre == nullptr) or (this->tipo->getPadre()->getNombre() == nuevoPadre->getTipo()->getNombre()))
+			if ((!nuevoPadre) or (this->tipo->getPadre()->getNombre() == nuevoPadre->getTipo()->getNombre()))
 				this->padre = nuevoPadre;
 			else
 				std::cout << "Padre inválido" << std::endl;
