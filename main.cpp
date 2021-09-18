@@ -1,12 +1,3 @@
-#include <cstdio>
-#include <string>
-#include <iostream>
-#include <vector>
-#include "Tipo.hpp"
-#include "Actividad.hpp"
-#include "ActividadSimple.hpp"
-#include "ActividadCompuesta.hpp"
-
 int main()
 {
     Tipo* proyecto = new Tipo("proyecto");
@@ -44,5 +35,10 @@ int main()
     fase2->add(tarea1);
     std::cout << tarea1->getPadre()->getDescripcion() << std::endl;
     std::cout << fase2->getHijos()[0]->getDescripcion() << std::endl;
-    return 0;
+    std::cout << "FIN" << std::endl;
+    
+    //probando excepciones
+    fase2->add(proyecto1);
+    ActividadSimple* tarea2 = new ActividadSimple("José", proyecto, "01/07/1998", "17/08/2022", "01/07/1998", "17/08/2021", "primera tarea");
+    ActividadCompuesta* proyecto2 = new ActividadCompuesta("Asdrúbal", tarea, "01/07/1999", "17/08/2021", "01/07/1999", "17/08/2021", "primera fase");
 }
