@@ -1,13 +1,10 @@
-#ifndef ACTIVIDADSIMPLE_H
-#define ACTIVIDADSIMPLE_H
+#ifndef ACTIVIDADSIMPLE_HPP
+#define ACTIVIDADSIMPLE_HPP
 #pragma once
 
-#include <string>
-
 #include "Actividad.hpp"
-#include "Tipo.hpp"
 
-class ActividadSimple : public Actividad<ActividadSimple> {
+class ActividadSimple : Actividad<ActividadSimple> {
  private:
  public:
   ActividadSimple(std::string responsable, Tipo* tipo,
