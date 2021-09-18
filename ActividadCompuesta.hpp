@@ -65,16 +65,16 @@ class ActividadCompuesta : public Actividad
 				std::cout << "No se permiten agregar hijos nulos" << std::endl;
 			else 
 			{
-			    Tipo* elPadre = nuevoHijo->getTipo()->getPadre();
-			    Tipo* elHijo = this->tipo->getHijo();
-    			if (elHijo and elPadre and elPadre->getNombre() == this->tipo->getNombre() 
-    			and nuevoHijo->getTipo()->getNombre() == elHijo->getNombre())
-    			{
-    				nuevoHijo->setPadre(this);
-    				this->hijos.push_back(nuevoHijo);
-    			}
-			    else
-				    std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
+				Tipo* elPadre = nuevoHijo->getTipo()->getPadre();
+				Tipo* elHijo = this->tipo->getHijo();
+				if (elHijo and elPadre and elPadre->getNombre() == this->tipo->getNombre() 
+				and nuevoHijo->getTipo()->getNombre() == elHijo->getNombre())
+				{
+					nuevoHijo->setPadre(this);
+					this->hijos.push_back(nuevoHijo);
+    				}
+			   	 else
+					std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
 			}
 		}
 
