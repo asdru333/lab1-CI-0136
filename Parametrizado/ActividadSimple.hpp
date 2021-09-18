@@ -4,9 +4,10 @@
 
 #include "Actividad.hpp"
 
-class ActividadSimple : Actividad<ActividadSimple> {
+class ActividadSimple : public Actividad<ActividadSimple> {
  private:
  public:
+  // TODO:generar vector en 0
   ActividadSimple(std::string responsable, Tipo* tipo,
                   std::string fechaPlanteadaInicio,
                   std::string fechaPlanteadaFinal, std::string fechaRealInicio,

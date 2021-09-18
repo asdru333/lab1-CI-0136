@@ -22,4 +22,4 @@ ActividadSimple::ActividadSimple(std::string responsable, Tipo* tipo,
   }
 }
 
-ActividadSimple::~ActividadSimple() { this->padre = nullptr }
+ActividadSimple::~ActividadSimple() { this->padre = nullptr; }
