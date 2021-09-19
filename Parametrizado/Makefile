@@ -1,55 +1,50 @@
-CXX=g++ -std=c++11
-FLAGS=$(strip -Wall -Wextra -std=c++11 -fopenmp)
-LIBS=-pthread
+CC=cc
+CXX=g++
+DEFS=
+FLAGS=-g -Wall -Wextra $(DEFS)
+CFLAGS=$(FLAGS) -std=gnu11
+CXXFLAGS=$(FLAGS) -std=gnu++11
+LIBS=-pthread -lm
 LINTFILTERS=$\
 	-build/c++11,$\
 	-build/header_guard,$\
 	-build/include_subdir,$\
+	-readability/casting,$\
 	-runtime/references
 
-BIN_DIR=bin
-OBJ_DIR=build
-SRC_DIR=src
-
-DIRS=$(shell find $(SRC_DIR) -type d)
-APPNAME=Parametrizado
-HEADERS=$(wildcard $(DIRS:%=%/*.hpp))
-SOURCES=$(wildcard $(DIRS:%=%/*.cpp))
-OBJECTS=$(SOURCES:src/%.cpp=build/%.o)
-INCLUDE=$(DIRS:%=-I%)
-IGNORES=$(BIN_DIR) $(OBJ_DIR)
-EXEFILE=$(BIN_DIR)/$(APPNAME)
-APPARGS=10 3 100 200 50
-
-default: debug
-
-debug: FLAGS += -g
-debug: $(EXEFILE)
-release: FLAGS += -O3 -DNDEBUG
-release: $(EXEFILE)
-asan: FLAGS += -fsanitize=address -fno-omit-frame-pointer
-asan: debug
-msan: FLAGS += -fsanitize=memory
-msan: CXX = clang++
-msan: debug
-tsan: FLAGS += -fsanitize=thread
-tsan: debug
-ubsan: FLAGS += -fsanitize=undefined
-ubsan: debug
+APPNAME:=$(shell basename $(shell pwd))
+DIRS:=src
+HEADERS:=$(wildcard $(DIRS:%=%/*.hpp))
+SOURCES:=$(wildcard $(DIRS:%=%/*.cpp))
+OBJECTS=$(SOURCES:src/%.c=build/%.o)
+INCLUDES=$(DIRS:%=-I%)
 
 .SECONDEXPANSION:
 
-$(EXEFILE): $(OBJECTS) | $$(@D)/.
-	$(CXX) $(FLAGS) $(INCLUDE) $^ -o $@ $(LIBS)
+bin/$(APPNAME): $(OBJECTS) | $$(@D)/.
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@ $(LIBS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS) | $$(@D)/.
-	$(CXX) -c $(FLAGS) $(INCLUDE) $< -o $@ $(LIBS)
+build/%.o: src/%.c $(HEADERS) | $$(@D)/.
+	$(CXX) -c $(CXXFLAGS) $(INCLUDES) $< -o $@ $(LIBS)
 
 .PRECIOUS: %/.
 %/.:
 	mkdir -p $(dir $@)
 
-all: bin/$(APPNAME) lint memcheck helgrind
+all: bin/$(APPNAME) sanitizers lint memcheck helgrind
+sanitizers: bin/$(APPNAME)_asan bin/$(APPNAME)_msan bin/$(APPNAME)_tsan bin/$(APPNAME)_ubsan
+
+bin/$(APPNAME)_asan: $(SOURCES)
+	clang $(CFLAGS) $(INCLUDES) -fsanitize=address $^ -o $@ $(LIBS)
+
+bin/$(APPNAME)_msan: $(SOURCES)
+	clang $(CFLAGS) $(INCLUDES) -fsanitize=memory $^ -o $@ $(LIBS)
+
+bin/$(APPNAME)_tsan: $(SOURCES)
+	clang $(CFLAGS) $(INCLUDES) -fsanitize=thread $^ -o $@ $(LIBS)
+
+bin/$(APPNAME)_ubsan: $(SOURCES)
+	clang $(CFLAGS) $(INCLUDES) -fsanitize=undefined $^ -o $@ $(LIBS)
 
 .PHONY: lint
 lint:
@@ -57,24 +52,17 @@ lint:
 
 .PHONY: memcheck
 memcheck:
-	valgrind --tool=memcheck bin/$(APPNAME)
+	valgrind --tool=memcheck bin/$(APPNAME) $(APPARGS)
 
 .PHONY: helgrind
 helgrind:
-	valgrind --quiet --tool=helgrind bin/$(APPNAME)
-
-.PHONY: callgrind
-callgrind:
-	valgrind --quiet --tool=callgrind bin/$(APPNAME)
+	valgrind --quiet --tool=helgrind bin/$(APPNAME) $(APPARGS)
 
 .PHONY: gitignore
 gitignore:
-	echo $(IGNORES) > .gitignore
+	echo bin > .gitignore
+	echo build >> .gitignore
 
 .PHONY: clean
 clean:
-	rm -rf $(IGNORES)
-
-.PHONY: trash
-trash:
-	rm -rf $(POS_OUTPUT) $(NEG_OUTPUT)
+	rm -rf bin build

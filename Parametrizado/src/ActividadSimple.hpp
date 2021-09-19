@@ -13,28 +13,29 @@ class ActividadSimple : public Actividad<ActividadSimple> {
   ActividadSimple* padre;
 
  public:
-  ActividadSimple(std::string nombre) { this->nombre = nombre; };
+  ActividadSimple(std::string nombre);
 
   ~ActividadSimple();
-  std::string nombre;
-
-  std::string getNombre() { return this->nombre; }
-  void setNombre(std::string nombre) { this->nombre = nombre; }
 
   ActividadSimple* getPadre() { return this->padre; }
   void setPadre(ActividadSimple* padre) { this->padre = padre; }
 
   void insertHijos(ActividadSimple& hijo) { this->hijos.push_back(hijo); }
 
-  void quienEsMiPapaYmiHijo() {
-    std::cout << "Mi papa es " << this->padre->getNombre()
-              << " Mis hijos son:\n";
-    for (ActividadSimple& hijo : this->hijos) {
-      std::cout << hijo.getNombre() << ", \n";
-    }
-    std::cout << std::endl;
-  }
+  void quienEsMiPapaYmiHijo();
 
   std::vector<ActividadSimple> getHijos() { return this->hijos; }
 };
+
+void ActividadSimple::quienEsMiPapaYmiHijo() {
+  std::cout << "Mi papa es " << this->padre->nombre << " Mis hijos son:\n";
+  for (ActividadSimple& hijo : this->hijos) {
+    std::cout << hijo.nombre << ", \n";
+  }
+  std::cout << std::endl;
+}
+
+ActividadSimple::ActividadSimple(std::string nombre) { this->nombre = nombre; }
+
+ActividadSimple::~ActividadSimple() {}
 #endif
