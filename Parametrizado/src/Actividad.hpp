@@ -21,7 +21,10 @@ class Actividad {
     }
   }
 
-  Actividad();
-  ~Actividad();
+  template <typename Self>
+  Actividad<Self>::Actividad() {}
+
+  template <typename Self>
+  Actividad<Self>::~Actividad() {}
 };
 #endif

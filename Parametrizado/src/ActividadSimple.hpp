@@ -13,7 +13,6 @@ class ActividadSimple : public Actividad<ActividadSimple> {
   ActividadSimple* padre;
 
  public:
-  ActividadSimple();
   ActividadSimple(std::string nombre) { this->nombre = nombre; };
 
   ~ActividadSimple();
