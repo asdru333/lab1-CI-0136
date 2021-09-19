@@ -5,9 +5,12 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 #include "Actividad.hpp"
 #include "ActividadSimple.hpp"
-class ActividadCompuesta : std::vector<ActividadSimple>,
+
+class ActividadCompuesta : public vector<ActividadSimple>,
                            public Actividad<ActividadCompuesta> {
  private:
  public:
@@ -17,10 +20,8 @@ class ActividadCompuesta : std::vector<ActividadSimple>,
   ~ActividadCompuesta();
 
   void quienEsMiPapaYmiHijo() {
-    ActividadSimple* act = this->begin()._Ptr;
-
-    std::cout << "Mi papa es " << act->getNombre() << " Mis hijos son:\n";
-    for (ActividadSimple& hijo : act->getHijos()) {
+    std::cout << "Mi papa es " << this->begin()->getNombre() << " Mis hijos son:\n";
+    for (ActividadSimple& hijo : this->begin()->getHijos()) {
       std::cout << hijo.getNombre() << ", \n";
     }
     std::cout << std::endl;

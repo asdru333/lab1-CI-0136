@@ -2,7 +2,7 @@ CXX=g++ -std=c++11
 FLAGS=$(strip -Wall -Wextra -std=c++11 -fopenmp)
 LIBS=-pthread
 LINTFILTERS=$\
-	-readability/casting,$\
+	-build/c++11,$\
 	-build/header_guard,$\
 	-build/include_subdir,$\
 	-runtime/references
@@ -10,11 +10,9 @@ LINTFILTERS=$\
 BIN_DIR=bin
 OBJ_DIR=build
 SRC_DIR=src
-POS_OUTPUT=positive_output
-NEG_OUTPUT=negative_output
 
 DIRS=$(shell find $(SRC_DIR) -type d)
-APPNAME=$(shell basename $(shell pwd))
+APPNAME=Parametrizado
 HEADERS=$(wildcard $(DIRS:%=%/*.hpp))
 SOURCES=$(wildcard $(DIRS:%=%/*.cpp))
 OBJECTS=$(SOURCES:src/%.cpp=build/%.o)
