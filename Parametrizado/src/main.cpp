@@ -1,25 +1,43 @@
 #include <iostream>
+using namespace std;
 
-#include "Actividad.hpp"
-#include "ActividadCompuesta.hpp"
-#include "ActividadSimple.hpp"
+#include "ActividadCompuesta.h"
+#include "ActividadSimple.h"
 
-int main(void) {
-  ActividadSimple simple1("simple1"), simple2("simple2");
+int main() {
+  Tipo* proyecto = new Tipo("proyecto");
+  Tipo* tarea = new Tipo("tarea");
+  Tipo* fase = new Tipo("fase", proyecto, tarea);
 
-  ActividadCompuesta proyecto("proy"), fase1("fase1"), fase2("fase2");
+  tarea->setPadre(fase);
+  proyecto->setHijo(fase);
 
-  proyecto.add<ActividadCompuesta>(fase1);
-  proyecto.add<ActividadCompuesta>(fase2);
+  ActividadSimple t1("t1"), t2("t2");
+  t1.setTipo(tarea);
+  t2.setTipo(tarea);
 
-  fase1.add<ActividadSimple>(simple1);
-  fase2.add<ActividadSimple>(simple2);
+  ActividadCompuesta proy("proy"), f1("f1");
 
-  proyecto.quienEsMiPapaYmiHijo();
-  fase1.quienEsMiPapaYmiHijo();
-  fase2.quienEsMiPapaYmiHijo();
-  fase1.quienEsMiPapaYmiHijo();
-  fase2.quienEsMiPapaYmiHijo();
+  proy.setTipo(proyecto);
+  f1.setTipo(fase);
 
-  return 0;
+  proy.add<ActividadCompuesta>(f1);
+  //proy.quienEsMiPapaYmiHijo();
+
+  cout << "============================================================\n";
+
+  f1.add<ActividadSimple>(t1);
+  f1.quienEsMiPapaYmiHijo();
+  cout << "============================================================\n";
+
+  f1.add<ActividadSimple>(t2);
+  f1.quienEsMiPapaYmiHijo();
+
+  cout << "============================================================\n";
+
+  f1.add<ActividadCompuesta>(proy);
+  t2.quienEsMiPapaYmiHijo();
+
+  cin.ignore();
+  cout << "end" << endl;
 }

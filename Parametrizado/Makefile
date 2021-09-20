@@ -12,7 +12,7 @@ LINTFILTERS=$\
 	-readability/casting,$\
 	-runtime/references
 
-APPNAME:=$(shell basename $(shell pwd))
+APPNAME:=Parametrizado
 DIRS:=src
 HEADERS:=$(wildcard $(DIRS:%=%/*.hpp))
 SOURCES:=$(wildcard $(DIRS:%=%/*.cpp))
