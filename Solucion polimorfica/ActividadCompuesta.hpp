@@ -43,7 +43,7 @@ class ActividadCompuesta : public Actividad
 		    return this->hijos;
 		}
 		
-		virtual void calcularFechas()
+		void calcularFechas() override
 		{
 			if (this->hijos.size() > 0)
 			{
@@ -59,7 +59,7 @@ class ActividadCompuesta : public Actividad
 			}
 		}
 
-		virtual void add(Actividad* nuevoHijo)
+		void add(Actividad* nuevoHijo) override
 		{
 			if (!nuevoHijo)
 				std::cout << "No se permiten agregar hijos nulos" << std::endl;
@@ -72,13 +72,13 @@ class ActividadCompuesta : public Actividad
 				{
 					nuevoHijo->setPadre(this);
 					this->hijos.push_back(nuevoHijo);
-    				}
+    			}
 			   	 else
 					std::cout << "No se puede agregar el hijo por problemas de jerarquía" << std::endl;
 			}
 		}
 
-		virtual void remove(Actividad* noHijo)
+		void remove(Actividad* noHijo) override
 		{
 			std::vector<Actividad*>::iterator iterator = this->hijos.begin();
 			while (*iterator != noHijo and iterator != this->hijos.end())

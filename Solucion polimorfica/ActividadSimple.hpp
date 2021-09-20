@@ -32,15 +32,15 @@ class ActividadSimple : public Actividad
 			this->padre = nullptr;
 		}
 		
-		virtual void calcularFechas() override
+		void calcularFechas() override
 		{
 		    ;
 		}
-		virtual void add(Actividad*) override
+		void add(Actividad*) override
 		{
 		    ;
 		}
-		virtual void remove(Actividad*) override
+		void remove(Actividad*) override
 		{
 		    ;
 		}
