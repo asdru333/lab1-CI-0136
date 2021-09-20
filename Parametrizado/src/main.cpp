@@ -13,18 +13,24 @@ int main() {
   proyecto->setHijo(fase);
 
   ActividadSimple t1("t1"), t2("t2");
+
   t1.setTipo(tarea);
   t2.setTipo(tarea);
-  // t1.setFechaPlanteadaFinal("01/12/1999");
-  /*t1.setFechaPlanteadaInicio("02/01/1999");
+
+  t1.setFechaPlanteadaFinal("01/12/1999");
+  t1.setFechaPlanteadaInicio("02/01/1999");
 
   t2.setFechaPlanteadaInicio("02/01/1999");
-  t2.setFechaPlanteadaFinal("01/03/2000");*/
+  t2.setFechaPlanteadaFinal("01/03/2000");
 
   ActividadCompuesta proy("proy"), f1("f1"), f2("f2");
   proy.setTipo(proyecto);
   f1.setTipo(fase);
   f2.setTipo(fase);
+
+  f1.setFechaPlanteadaInicio("03/09/2021");
+  f1.setFechaPlanteadaFinal("03/09/2022");
+
   proy.add<ActividadCompuesta>(f1);
   proy.add<ActividadCompuesta>(f2);
   proy.quienEsMiPapaYmiHijo();
@@ -39,6 +45,9 @@ int main() {
   f1.add<ActividadSimple>(t2);
   f1.quienEsMiPapaYmiHijo();
 
+  f1.calcularFechas();
+  cout << "FECHAS:\n\n"
+       << f1.getFechaRealInicio() << " || " << f1.getFechaPlanteadaFinal();
   cout << "============================================================\n";
 
   f1.add<ActividadCompuesta>(proy);
