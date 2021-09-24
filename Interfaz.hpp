@@ -12,12 +12,13 @@ class Interfaz
 {
 	private:
 		std::vector<Tipo*> vectorTipos;
-		std::vector<Actividad*> vectorActividades;
+		std::vector<std::vector<Actividad*>> vectorActividades;
 		
 	public:
-		Interfaz(std::vector<Tipo*> vectorTipos)
+		Interfaz(int cantidad, std::vector<Tipo*> vectorTipos)
 		{
 			this->vectorTipos = vectorTipos;
+			this->vectorActividades.resize(cantidad);
 		}
 		
 		void menuPrincipal()
@@ -29,15 +30,16 @@ class Interfaz
 				std::cout << "Por favor seleccione algunas de las siguientes opciones:" << std::endl;
 				std::cout << "1. Crear instancias de tipos" << std::endl;
 				//std::cout << "2. Ver actividad padre" << std::endl;
-				std::cout << "3. Ver jerarquia de tipos" << std::endl;
+				std::cout << "2. Ver jerarquia de tipos" << std::endl;
+				std::cout << "3. Ver instancias" << std::endl;
 				std::cout << "4. salir" << std::endl;
 				std::cin >> opcion;
 				if (opcion == 1)
-					menuInstancias();
-				//else if (opcion == 2)
-					//interactuarInstancias();
-				else if (opcion == 3)
+					crearInstancias();
+				else if (opcion == 2)
 					verJerarquia();	
+				else if (opcion == 3)
+					verInstancias();
 				else if (opcion == 4)
 					terminar = 1;
 				else
@@ -45,14 +47,37 @@ class Interfaz
 			}
 		}
 		
-		/**
-		std::cout << "Actividad raiz de tipo " << raiz->getTipo()->getNombre() << " ha sido creada" << std::endl;
-		int numHijos = 0;
-		std::cout << "Ingrese la cantidad de hijos" << std::endl;
-		std::cin >> numhijos
-		*/
-		
-		
+		void crearInstancias()
+		{
+			Actividad* proyecto;
+			int tamano = this->vectorTipos.size();
+			if (tamano == 0)
+				std::cout << "Error con la jerarquía de tipos (no existe)" << std::endl;	
+			else if (tamano == 1)
+			{
+				proyecto = CrearActividadSimple(0);
+				this->vectorActividades[0].push_back(proyecto);
+			}
+			else
+			{
+				proyecto = CrearActividadCompuesta(0);
+				this->vectorActividades[0].push_back(proyecto);
+				int numHijos = 0;
+				Actividad* hijo;
+				for (int contador = 0; contador < tamano-1; ++contador)
+				{
+					for (int index = 0; index < this->vectorActividades[contador].size(); ++index)
+					{
+						std::cout << "Ingrese la cantidad de hijos que quiere para " << this->vectorTipos[contador]->getNombre() << index+1 << std::endl;
+						std::cin >> numHijos;
+						for (int contador2 = 0; contador2 < numHijos; ++contador2)
+						{
+							this->crearHijos(this->vectorActividades[contador][index], contador+1);
+						}
+					}		
+				}
+			}
+		}
 		
 		void verJerarquia()
 		{
@@ -60,31 +85,49 @@ class Interfaz
 			{
 				std::cout << this->vectorTipos[index]->getNombre();
 				if (index + 1 != this->vectorTipos.size())
-					std::cout << "> ";
+					std::cout << " > ";
 				else
 					std::cout << '\n';
 			}
 		}
 		
-	private:
-		
-		CrearActividadCompuesta(int index)
+		void verInstancias()
 		{
-			return new ActividadCompuesta("Carlos", vectorTipos[index], "21/07/2021", "26/07/2021", "21/07/2021", "26/07/2021", "")
-		}	
-		
-		CrearActividadSimple(int index)
-		{
-			return new ActividadSimple("Carlos", vectorTipos[index], "21/07/2021", "26/07/2021", "21/07/2021", "26/07/2021", "")
+			ActividadCompuesta* actividad = nullptr;
+			if (this->vectorActividades.empty())
+				std::cout << "No existen las instancias" << std::endl;
+			else
+			{
+				for (int row = 0; row < vectorActividades.size(); ++row)
+				{
+					for (int col = 0; col < vectorActividades[row].size(); ++col)
+					{
+						std::cout << "Se tiene " << vectorActividades[row][col]->getTipo()->getNombre() << col << std::endl;
+					}
+				}
+			}
 		}
 		
-		Actividad* crearHijos(Actividad* padre, int index)
+	private:
+		
+		Actividad* CrearActividadCompuesta(int index)
+		{
+			return new ActividadCompuesta("Carlos", vectorTipos[index], "21/07/2021", "26/07/2021", "21/07/2021", "26/07/2021", "");
+		}	
+		
+		Actividad* CrearActividadSimple(int index)
+		{
+			return new ActividadSimple("Carlos", vectorTipos[index], "21/07/2021", "26/07/2021", "21/07/2021", "26/07/2021", "");
+		}
+		
+		void crearHijos(Actividad* padre, int index)
 		{
 			Actividad* hijo;
 			if (index+1 < this->vectorTipos.size())
 				hijo = CrearActividadCompuesta(index);
 			else
 				hijo = CrearActividadSimple(index);	
-			return hijo;
+			padre->add(hijo);
+			this->vectorActividades[index].push_back(hijo);
 		}
 };
