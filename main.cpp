@@ -19,30 +19,37 @@ int main()
 		std::cout << "2. Proyecto compuesto" << std::endl;
 		std::cout << "3. salir" << std::endl;
 		std::cin >> opcion;
-		if (opcion == 1)
+		if (opcion == 1 or opcion == 2)
 		{
-			Tipo* proyecto = new Tipo("proyecto");
-			Tipo* tarea = new Tipo("tarea", proyecto);
-			proyecto->setHijo(tarea);
-			std::vector <Tipo*> vectorTipos(proyecto, tarea);
-			Interfaz interfaz(vectorTipos);
-			interfaz.menuPrincipal();
-		}	
-		else if (opcion == 2)
-		{
-			Tipo* proyecto = new Tipo("proyecto");
-		    Tipo* tarea = new Tipo("tarea");
-		    Tipo* fase = new Tipo("fase", proyecto, tarea);
-		    tarea->setPadre(fase);
-		    proyecto->setHijo(fase);
-		    std::vector <Tipo*> vectorTipos(proyecto, fase, tarea);
-		    Interfaz interfaz(vectorTipos);
-		    interfaz.menuPrincipal();
+			std::vector<Tipo*> vectorTipos;
+			if (opcion == 1)
+			{
+				Tipo* proyecto = new Tipo("proyecto");
+				Tipo* tarea = new Tipo("tarea", proyecto);
+				proyecto->setHijo(tarea);
+				vectorTipos.push_back(proyecto);
+				vectorTipos.push_back(tarea);
+			}
+			else
+			{
+				Tipo* proyecto = new Tipo("proyecto");
+			    Tipo* tarea = new Tipo("tarea");
+			    Tipo* fase = new Tipo("fase", proyecto, tarea);
+			    tarea->setPadre(fase);
+			    proyecto->setHijo(fase);
+			    vectorTipos.push_back(proyecto);
+			    vectorTipos.push_back(fase);
+				vectorTipos.push_back(tarea);
+			}
+			Interfaz* interfaz = new Interfaz(vectorTipos.size(), vectorTipos);
+		    interfaz->menuPrincipal();
 		}
+			
 		else if (opcion == 3)
 		{
 			terminar = 1;
 		}
+		
 		else
 		{
 			std::cout << "Opcion incorrecta. Por favor escriba un numero valido" << std::endl;
@@ -100,7 +107,7 @@ int main()
     ActividadCompuesta* proyecto2 = new ActividadCompuesta("Asdrubal", tarea, "01/07/1999", "17/08/2021", "01/07/1999", "17/08/2021", "primera fase");
     
     
-    //Probando la flexibilidad, para evitar cambios en la jerarquía anterior, se van a crear dos tipos nuevos
+    //Probando la flexibilidad, para evitar cambios en la jerarquÃ­a anterior, se van a crear dos tipos nuevos
     Tipo* otroProyecto = new Tipo("proyecto");
     Tipo* otraTarea = new Tipo("tarea");
     otroProyecto->setHijo(otraTarea);
