@@ -4,14 +4,12 @@
 
 ConstructorJSON::ConstructorJSON() {}
 ConstructorJSON::~ConstructorJSON() {}
-int ConstructorJSON::serializadorActividad(Actividad* actividad) {
+void ConstructorJSON::serializadorActividad(Actividad* actividad) {
   std::string actividadSerializada = "{";
 
   actividadSerializada += this->funcAuxiliar(actividad, "") += '}';
 
   std::cout << actividadSerializada;
-
-  return EXIT_SUCCESS;
 }
 
 std::string ConstructorJSON::funcAuxiliar(Actividad* actividad,
@@ -29,7 +27,7 @@ std::string ConstructorJSON::funcAuxiliar(Actividad* actividad,
 
   if (actividad->getTipo()->getTipoActividad() == "ACTIVIDADCOMPUESTA") {
     for (size_t hijo = 0; hijo < actividad->getHijos().size(); hijo++) {
-      hilera << actividad->getHijos()[hijo]->toString(indentacion + "\t");
+      hilera << funcAuxiliar(actividad->getHijos()[hijo], indentacion + "\t");
     }
   }
 

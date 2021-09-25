@@ -150,7 +150,7 @@ int main() {
   fase1->add(tarea1);
 
   ConstructorJSON constructorJSON;
-
+  ConstructorXML xml;
   // NO SE PUEDE CON PROYECTO 2 DA SEGMENTATION FAULT CUANDO EL CONSTRUCTOR JSON
   // INTENTA ACCEDER A LOS DATOS ESTO ES PORQUE EN EL CONTRUCTOR DE PROYECTO2
   // NUNCA SE LE ASIGNAN LOS ATRIBUTOS.. PORQUE TIENE UN TIPO NO VALIDO POR
@@ -158,10 +158,18 @@ int main() {
   /// LE ASIGNA LOS ATRIBUTOS
   // constructorJSON.serializadorActividad(proyecto2);
 
+  std::cout << "JSON: " << std::endl;
   constructorJSON.serializadorActividad(proyecto1);
   std::cout << std::endl << std::endl;
 
   constructorJSON.serializadorActividad(proyecto3);
+  std::cout << std::endl << std::endl;
+
+  std::cout << "XML: " << std::endl;
+  xml.serializadorActividad(proyecto1);
+  std::cout << std::endl << std::endl;
+
+  xml.serializadorActividad(proyecto3);
   std::cout << std::endl << std::endl;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -63,6 +63,5 @@ class Actividad {
   virtual void calcularFechas() = 0;
   virtual void add(Actividad*) = 0;
   virtual void remove(Actividad*) = 0;
-  virtual std::string toString(std::string indentacion) = 0;
   virtual std::vector<Actividad*> getHijos() = 0;
 };

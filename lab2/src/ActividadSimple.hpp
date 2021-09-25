@@ -26,19 +26,6 @@ class ActividadSimple : public Actividad {
     }
   }
 
-  std::string toString(std::string indentacion) override {
-    std::stringstream hilera;
-    hilera << indentacion << "\"Tipo\": " << '"' << this->tipo->getNombre()
-           << '"' << ",\n";
-    hilera << indentacion << "\"Descripcion\": \"" << this->descripcion
-           << "\",\n";
-    hilera << indentacion << "\"Fecha planteada de inicio\": \""
-           << this->fechaPlanteadaInicio << "\",\n";
-    hilera << indentacion << "\"Fecha planteada de finalizacion\": \""
-           << this->fechaPlanteadaFinal << "\",\n";
-    return hilera.str();
-  }
-
   ~ActividadSimple() { this->padre = nullptr; }
 
   void calcularFechas() override { ; }

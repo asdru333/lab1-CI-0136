@@ -12,6 +12,6 @@ class ConstructorJSON : public ConstructorAbstracto {
  public:
   ConstructorJSON();
   ~ConstructorJSON();
-  int serializadorActividad(Actividad* actividad) override;
+  void serializadorActividad(Actividad* actividad) override;
 };
 #endif

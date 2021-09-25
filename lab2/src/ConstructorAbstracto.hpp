@@ -10,7 +10,7 @@ class ConstructorAbstracto {
   std::string resultado;
 
  public:
-  virtual int serializadorActividad(Actividad* actividad) = 0;
+  virtual void serializadorActividad(Actividad* actividad) = 0;
 };
 
 #endif

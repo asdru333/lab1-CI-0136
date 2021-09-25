@@ -41,22 +41,6 @@ class ActividadCompuesta : public Actividad {
     this->hijos.clear();
   }
 
-  std::string toString(std::string indentacion) override {
-    std::stringstream hilera;
-    hilera << indentacion << "\"Tipo\": " << '"' << this->tipo->getNombre()
-           << '"' << ",\n";
-    hilera << indentacion << "\"Descripcion\": \"" << this->descripcion
-           << "\",\n";
-    hilera << indentacion << "\"Fecha planteada de inicio\": \""
-           << this->fechaPlanteadaInicio << "\",\n";
-    hilera << indentacion << "\"Fecha planteada de finalizacion\": \""
-           << this->fechaPlanteadaFinal << "\",\n";
-    for (size_t hijo = 0; hijo < this->hijos.size(); hijo++) {
-      hilera << this->hijos[hijo]->toString(indentacion + "\t");
-    }
-    return hilera.str();
-  }
-
   std::vector<Actividad*> getHijos() override { return this->hijos; }
 
   void calcularFechas() override {
