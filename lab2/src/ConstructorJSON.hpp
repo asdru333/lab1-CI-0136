@@ -7,9 +7,11 @@
 
 class ConstructorJSON : public ConstructorAbstracto {
  private:
+  std::string funcAuxiliar(Actividad* actividad, std::string indentacion);
+
  public:
   ConstructorJSON();
   ~ConstructorJSON();
-  int serializadorActividad(Actividad* actividad) override {}
+  int serializadorActividad(Actividad* actividad) override;
 };
 #endif

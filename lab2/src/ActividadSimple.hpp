@@ -44,4 +44,9 @@ class ActividadSimple : public Actividad {
   void calcularFechas() override { ; }
   void add(Actividad*) override { ; }
   void remove(Actividad*) override { ; }
+  std::vector<Actividad*> getHijos() override {
+    std::vector<Actividad*> vectorVacio;
+    vectorVacio.clear();
+    return vectorVacio;
+  }
 };

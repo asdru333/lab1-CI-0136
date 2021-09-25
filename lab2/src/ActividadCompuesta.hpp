@@ -38,7 +38,7 @@ class ActividadCompuesta : public Actividad {
 
   ~ActividadCompuesta() {
     this->padre = nullptr;
-    this->hijos.empty();
+    this->hijos.clear();
   }
 
   std::string toString(std::string indentacion) override {
@@ -57,7 +57,7 @@ class ActividadCompuesta : public Actividad {
     return hilera.str();
   }
 
-  std::vector<Actividad*> getHijos() { return this->hijos; }
+  std::vector<Actividad*> getHijos() override { return this->hijos; }
 
   void calcularFechas() override {
     if (this->hijos.size() > 0) {
@@ -84,8 +84,8 @@ class ActividadCompuesta : public Actividad {
     else {
       Tipo* elPadre = nuevoHijo->getTipo()->getPadre();
       Tipo* elHijo = this->tipo->getHijo();
-      if (elHijo and elPadre and
-          elPadre->getNombre() == this->tipo->getNombre() and
+      if (elHijo && elPadre &&
+          elPadre->getNombre() == this->tipo->getNombre() &&
           nuevoHijo->getTipo()->getNombre() == elHijo->getNombre()) {
         nuevoHijo->setPadre(this);
         this->hijos.push_back(nuevoHijo);
@@ -97,7 +97,7 @@ class ActividadCompuesta : public Actividad {
 
   void remove(Actividad* noHijo) override {
     std::vector<Actividad*>::iterator iterator = this->hijos.begin();
-    while (*iterator != noHijo and iterator != this->hijos.end()) {
+    while (*iterator != noHijo && iterator != this->hijos.end()) {
       ++iterator;
     }
     if (iterator != this->hijos.end()) {

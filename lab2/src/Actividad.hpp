@@ -20,7 +20,7 @@ class Actividad {
  public:
   Actividad* getPadre() { return this->padre; }
   void setPadre(Actividad* nuevoPadre) {
-    if ((!nuevoPadre) or (this->tipo->getPadre()->getNombre() ==
+    if ((!nuevoPadre) || (this->tipo->getPadre()->getNombre() ==
                           nuevoPadre->getTipo()->getNombre()))
       this->padre = nuevoPadre;
     else
@@ -64,4 +64,5 @@ class Actividad {
   virtual void add(Actividad*) = 0;
   virtual void remove(Actividad*) = 0;
   virtual std::string toString(std::string indentacion) = 0;
+  virtual std::vector<Actividad*> getHijos() = 0;
 };

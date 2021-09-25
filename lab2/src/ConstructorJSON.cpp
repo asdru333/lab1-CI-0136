@@ -1,0 +1,37 @@
+#include "ConstructorJSON.hpp"
+
+#include <sstream>
+
+ConstructorJSON::ConstructorJSON() {}
+ConstructorJSON::~ConstructorJSON() {}
+int ConstructorJSON::serializadorActividad(Actividad* actividad) {
+  std::string actividadSerializada = "{";
+
+  actividadSerializada += this->funcAuxiliar(actividad, "") += '}';
+
+  std::cout << actividadSerializada;
+
+  return EXIT_SUCCESS;
+}
+
+std::string ConstructorJSON::funcAuxiliar(Actividad* actividad,
+                                          std::string indentacion) {
+  std::stringstream hilera;
+
+  hilera << indentacion << "\"Tipo\": " << '"'
+         << actividad->getTipo()->getNombre() << '"' << ",\n";
+  hilera << indentacion << "\"Descripcion\": \"" << actividad->getDescripcion()
+         << "\",\n";
+  hilera << indentacion << "\"Fecha planteada de inicio\": \""
+         << actividad->getFechaPlanteadaInicio() << "\",\n";
+  hilera << indentacion << "\"Fecha planteada de finalizacion\": \""
+         << actividad->getFechaPlanteadaFinal() << "\",\n";
+
+  if (actividad->getTipo()->getTipoActividad() == "ACTIVIDADCOMPUESTA") {
+    for (size_t hijo = 0; hijo < actividad->getHijos().size(); hijo++) {
+      hilera << actividad->getHijos()[hijo]->toString(indentacion + "\t");
+    }
+  }
+
+  return hilera.str();
+}
