@@ -18,6 +18,8 @@ std::string ConstructorJSON::funcAuxiliar(Actividad* actividad,
 
   hilera << indentacion << "\"Tipo\": " << '"'
          << actividad->getTipo()->getNombre() << '"' << ",\n";
+  hilera << indentacion << "\"Responsable\": " << '"'
+         << actividad->getResponsable() << '"' << ",\n";
   hilera << indentacion << "\"Descripcion\": \"" << actividad->getDescripcion()
          << "\",\n";
   hilera << indentacion << "\"Fecha planteada de inicio\": \""

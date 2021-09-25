@@ -9,7 +9,7 @@ void ConstructorXML::serializadorActividad(Actividad* actividad) {
       "<?xml version= \"personalizada\" encoding= \"utf-8\"?>\n";
   actividadSerializada += "\t<Actividades>\n";
   actividadSerializada += this->funcAuxiliar(actividad, "\t\t");
-  actividadSerializada += "\n\t</Actividades>";
+  actividadSerializada += "\n\t</Actividades>\n";
   std::cout << actividadSerializada;
 }
 
@@ -19,6 +19,8 @@ std::string ConstructorXML::funcAuxiliar(Actividad* actividad,
 
   hilera << indentacion << "<Tipo= " << '"' << actividad->getTipo()->getNombre()
          << '"' << ">\n";
+  hilera << indentacion << "<Responsable= " << '"'
+         << actividad->getResponsable() << '"' << ">\n";
   hilera << indentacion << "<Descripcion= \"" << actividad->getDescripcion()
          << ">\n";
   hilera << indentacion << "<Fecha planteada de inicio= \""

@@ -6,13 +6,10 @@
 #include "Actividad.hpp"
 #include "ActividadCompuesta.hpp"
 #include "ActividadSimple.hpp"
-#include "ConstructorJSON.hpp"
-#include "ConstructorXML.hpp"
 #include "Interfaz.hpp"
 #include "Tipo.hpp"
 
 int main() {
-  /*
   bool terminar = 0;
   while (!terminar) {
     int opcion = 0;
@@ -24,15 +21,15 @@ int main() {
     if (opcion == 1 or opcion == 2) {
       std::vector<Tipo*> vectorTipos;
       if (opcion == 1) {
-        Tipo* proyecto = new Tipo("proyecto");
-        Tipo* tarea = new Tipo("tarea", proyecto);
+        Tipo* proyecto = new Tipo("proyectoSimple", "ACTIVIDADCOMPUESTA");
+        Tipo* tarea = new Tipo("tarea", "ACTIVIDADSIMPLE");
         proyecto->setHijo(tarea);
         vectorTipos.push_back(proyecto);
         vectorTipos.push_back(tarea);
       } else {
-        Tipo* proyecto = new Tipo("proyecto");
-        Tipo* tarea = new Tipo("tarea");
-        Tipo* fase = new Tipo("fase", proyecto, tarea);
+        Tipo* proyecto = new Tipo("proyectoCompuesto", "ACTIVIDADCOMPUESTA");
+        Tipo* tarea = new Tipo("tarea", "ACTIVIDADSIMPLE");
+        Tipo* fase = new Tipo("fase", "ACTIVIDADCOMPUESTA", proyecto, tarea);
         tarea->setPadre(fase);
         proyecto->setHijo(fase);
         vectorTipos.push_back(proyecto);
@@ -55,10 +52,7 @@ int main() {
   return 0;
 }
 
-
-
-**/
-
+/**
   // Definiendo los tipos y la jerarquia
   Tipo* proyecto = new Tipo("proyecto", "ACTIVIDADCOMPUESTA");
   Tipo* tarea = new Tipo("tarea", "ACTIVIDADSIMPLE");
@@ -86,11 +80,10 @@ int main() {
 
   // Creando una actividad compuesta fase y agregrandola como hija al proyecto
   ActividadCompuesta* fase1 =
-      new ActividadCompuesta("", fase, "01/07/1999", "17/08/2021", "01/07/1999",
-                             "17/08/2021", "primera fase");
-  proyecto1->add(fase1);
-  std::cout << proyecto1->getHijos()[0]->getDescripcion() << std::endl;
-  std::cout << proyecto1->getHijos()[0]->getPadre()->getDescripcion()
+      new ActividadCompuesta("", fase, "01/07/1999", "17/08/2021",
+"01/07/1999", "17/08/2021", "primera fase"); proyecto1->add(fase1); std::cout
+<< proyecto1->getHijos()[0]->getDescripcion() << std::endl; std::cout <<
+proyecto1->getHijos()[0]->getPadre()->getDescripcion()
             << std::endl;
   std::cout << fase1->getResponsable() << std::endl;
   // Comprobando la cadena de responsabilidad
@@ -125,7 +118,8 @@ int main() {
       new ActividadCompuesta("Asdrubal", tarea, "01/07/1999", "17/08/2021",
                              "01/07/1999", "17/08/2021", "primera fase");
 
-  // Probando la flexibilidad, para evitar cambios en la jerarquía anterior, se
+  // Probando la flexibilidad, para evitar cambios en la jerarquía anterior,
+se
   // vana crear dos tipos nuevos
   Tipo* otroProyecto = new Tipo("proyecto", "ACTIVIDADCOMPUESTA");
   Tipo* otraTarea = new Tipo("tarea", "ACTIVIADSIMPLE");
@@ -151,10 +145,12 @@ int main() {
 
   ConstructorJSON constructorJSON;
   ConstructorXML xml;
-  // NO SE PUEDE CON PROYECTO 2 DA SEGMENTATION FAULT CUANDO EL CONSTRUCTOR JSON
+  // NO SE PUEDE CON PROYECTO 2 DA SEGMENTATION FAULT CUANDO EL CONSTRUCTOR
+JSON
   // INTENTA ACCEDER A LOS DATOS ESTO ES PORQUE EN EL CONTRUCTOR DE PROYECTO2
   // NUNCA SE LE ASIGNAN LOS ATRIBUTOS.. PORQUE TIENE UN TIPO NO VALIDO POR
-  /// AL SER ACTIVIDAD COMPUESTA NO PUEDE TENER TIPO TAREA ENTONCES NI SIQUIERA
+  /// AL SER ACTIVIDAD COMPUESTA NO PUEDE TENER TIPO TAREA ENTONCES NI
+SIQUIERA
   /// LE ASIGNA LOS ATRIBUTOS
   // constructorJSON.serializadorActividad(proyecto2);
 
@@ -175,3 +171,5 @@ int main() {
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   std::cout << std::endl << "FIN" << std::endl;
 }
+
+**/
