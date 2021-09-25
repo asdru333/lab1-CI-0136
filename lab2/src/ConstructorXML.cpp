@@ -22,7 +22,7 @@ std::string ConstructorXML::funcAuxiliar(Actividad* actividad,
   hilera << indentacion << "<Responsable= " << '"'
          << actividad->getResponsable() << '"' << ">\n";
   hilera << indentacion << "<Descripcion= \"" << actividad->getDescripcion()
-         << ">\n";
+         << "\">\n";
   hilera << indentacion << "<Fecha planteada de inicio= \""
          << actividad->getFechaPlanteadaInicio() << "\">\n";
   hilera << indentacion << "<Fecha planteada de finalizacion= \""

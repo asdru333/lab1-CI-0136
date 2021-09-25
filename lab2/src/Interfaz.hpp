@@ -30,15 +30,9 @@ class Interfaz {
     std::cout << "1.JSON\n2.XML" << std::endl;
     std::cin >> opcion;
     if (opcion == 1) {
-      // for (size_t index = 0; index < this->vectorActividades.size(); index++)
-      // {
       this->JSON.serializadorActividad(this->vectorActividades[0][0]);
-      //}
     } else if (opcion == 2) {
-      // for (size_t index = 0; index < this->vectorActividades.size(); index++)
-      // {
       this->XML.serializadorActividad(this->vectorActividades[0][0]);
-      //}
     } else {
       std::cout << "Opcion incorrecta\n";
     }
@@ -148,10 +142,14 @@ class Interfaz {
 
   void crearHijos(Actividad* padre, int index) {
     Actividad* hijo;
-    if (index + 1 < this->vectorTipos.size())
+    if (index + 1 < this->vectorTipos.size()) {
       hijo = CrearActividadCompuesta(index);
-    else
+      hijo->setDescripcion("Esta es una actividad de prueba");
+    } else {
       hijo = CrearActividadSimple(index);
+      hijo->setDescripcion("Esta es una actividad de prueba");
+    }
+
     padre->add(hijo);
     this->vectorActividades[index].push_back(hijo);
   }
