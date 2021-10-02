@@ -4,14 +4,14 @@
 
 #include <ostream>
 
-class Compresor2 : public std::ostream {
+class CompresorBeta : public std::ostream {
  private:
   std::ostream* buffer;
 
  public:
-  Compresor2(std::ostream* buffer);
+  CompresorBeta(std::ostream* buffer);
 
-  ~Compresor2();
+  ~CompresorBeta();
 
   std::ostream& operator<<(const char* str);
 };

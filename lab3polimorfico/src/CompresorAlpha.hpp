@@ -1,17 +1,17 @@
-#ifndef COMPRESOR1_H
-#define COMPRESOR1_H
+#ifndef COMPRESORALPHA_H
+#define COMPRESORALPHA_H
 #pragma once
 #include <cstring>
 #include <ostream>
 
 // TODO : Arreglar el diseño
-class Compresor1 : public std::ostream {
+class CompresorAlpha : public std::ostream {
  private:
  public:
   std::ostream *buffer;
-  Compresor1(std::ostream *buffer);
+  CompresorAlpha(std::ostream *buffer);
 
-  ~Compresor1();
+  ~CompresorAlpha();
 
   std::ostream &operator<<(const char *str);
 };
