@@ -1,9 +1,9 @@
+#include <fstream>
+#include <iostream>
+#include <sstream>
+
 #include "Compresor1.hpp"
 #include "Compresor2.hpp"
-
-
-#include <fstream>
-#include <sstream>
 
 int main() {
   std::fstream fstreamBuffer;
@@ -13,8 +13,10 @@ int main() {
 
   stringstreamBuffer << "hola";
 
-  Compresor1 compresor1(&fstreamBuffer);
+  Compresor1 compresor1(&stringstreamBuffer);
+  Compresor2 compresor2(&stringstreamBuffer);
   compresor1 << "Javier y Asdrubal";
+  compresor2 << "Compresion 2";
   std::cout << stringstreamBuffer.str();
 
   return 0;

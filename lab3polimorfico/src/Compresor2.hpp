@@ -2,15 +2,18 @@
 #define COMPRESOR2_H
 #pragma once
 
-class Compresor2 {
-private:
+#include <ostream>
 
-public:
+class Compresor2 : public std::ostream {
+ private:
+  std::ostream* buffer;
 
-    Compresor2();
+ public:
+  Compresor2(std::ostream* buffer);
 
-    ~Compresor2();
+  ~Compresor2();
 
+  std::ostream& operator<<(const char* str);
 };
 
 #endif
