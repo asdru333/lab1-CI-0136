@@ -1,16 +1,21 @@
 #include "Compresor1.hpp"
 #include "Compresor2.hpp"
 
-using namespace std;
+
+#include <fstream>
 #include <sstream>
 
 int main() {
-  Compresor1 compresor;
+  std::fstream fstreamBuffer;
+  std::ofstream ofstreamBuffer;
+  std::stringstream stringstreamBuffer;
+  std::ostringstream ostringstreamBuffer;
 
-  stringstream ss1;
+  stringstreamBuffer << "hola";
 
-  compresor.comprimir(ss1);
-  cout << ss1.str();
+  Compresor1 compresor1(&fstreamBuffer);
+  compresor1 << "Javier y Asdrubal";
+  std::cout << stringstreamBuffer.str();
 
   return 0;
 }
