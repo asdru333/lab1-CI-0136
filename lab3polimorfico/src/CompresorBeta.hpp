@@ -7,6 +7,7 @@
 class CompresorBeta : public std::ostream {
  private:
   std::ostream* buffer;
+  void algoritmoBeta(const char* str);
 
  public:
   CompresorBeta(std::ostream* buffer);
@@ -14,6 +15,7 @@ class CompresorBeta : public std::ostream {
   ~CompresorBeta();
 
   std::ostream& operator<<(const char* str);
+  std::ostream& operator<<(std::string& str);
 };
 
 #endif

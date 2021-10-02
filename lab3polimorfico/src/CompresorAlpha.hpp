@@ -3,10 +3,12 @@
 #pragma once
 #include <cstring>
 #include <ostream>
+#include <string>
 
-// TODO : Arreglar el diseño
 class CompresorAlpha : public std::ostream {
  private:
+  void algoritmoAlpha(const char *str);
+
  public:
   std::ostream *buffer;
   CompresorAlpha(std::ostream *buffer);
@@ -14,6 +16,7 @@ class CompresorAlpha : public std::ostream {
   ~CompresorAlpha();
 
   std::ostream &operator<<(const char *str);
+  std::ostream &operator<<(std::string &str);
 };
 
 #endif

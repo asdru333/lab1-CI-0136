@@ -6,29 +6,31 @@
 #include "CompresorBeta.hpp"
 
 int main() {
+  std::string prueba = "stringstream-compresorAlpha con variable std::string";
   std::stringstream sstream;
   CompresorAlpha compresorSs(&sstream);
-  compresorSs << "Prueba:stringstream-compresorAlpha";
+  compresorSs << prueba;
   std::cout << sstream.str();
 
   std::cout << std::endl;
 
   std::ostringstream osstream;
   CompresorBeta compresorOss(&osstream);
-  compresorOss << "Prueba:ostringstream-compresorBeta";
+  compresorOss << "ostringstream-compresorBeta texto directo";
 
-  std::cout << osstream.str();
+  std::cout << osstream.str() << std::endl;
 
   std::fstream fstream;
   CompresorAlpha compresorFs(&fstream);
   fstream.open("text1fs.txt", std::fstream::out);
-  compresorFs << "Prueba:fstream-compresorAlpha";
+  compresorFs << "fstream-compresorAlpha texto directo";
   fstream.close();
 
+  prueba = "ofstream-compresorBeta con variable std::string";
   std::ofstream ofstream;
   CompresorBeta compresorOfs(&ofstream);
   ofstream.open("text1ofs.txt", std::fstream::out);
-  compresorOfs << "Prueba:ofstream-compresorBeta";
+  compresorOfs << prueba;
   ofstream.close();
   return 0;
 }
