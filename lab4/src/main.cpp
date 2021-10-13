@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "OperandoEntero.hpp"
+#include "OperandoDouble.hpp"
 
 int main() {
-  OperandoEntero op1(1024);
-  OperandoEntero op2(256);
-  OperandoEntero res = op1 + op2;
+  OperandoDouble op1(1024.5);
+  OperandoDouble op2(256.5);
+  OperandoDouble res = op1 + op2;
   std::cout << "Suma: ";
   std::cout << res.getValor() << std::endl;
   res = op1 - op2;
