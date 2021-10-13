@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <string>
 
-#include "OperandoFraction.hpp"
+#include "OperandoFraction.h"
 
 OperandoFraction::OperandoFraction(const long long numerator, const long long denominator)
 	: numerator{ numerator }
@@ -20,29 +20,33 @@ OperandoFraction::OperandoFraction(std::string fraction)
 OperandoFraction& OperandoFraction::operator+(Operando& oper)
 {
 	OperandoFraction* other = dynamic_cast<OperandoFraction*>(&oper);
-	return OperandoFraction{this->numerator * other.denominator + this->denominator * other.numerator
-				, this->denominator * other.denominator};
+	OperandoFraction* returned = new OperandoFraction(this->numerator * other->denominator + this->denominator * other->numerator
+				            , this->denominator * other->denominator);
+	return *returned;
 }
 
 OperandoFraction& OperandoFraction::operator-(Operando& oper)
 {
 	OperandoFraction* other = dynamic_cast<OperandoFraction*>(&oper);
-	return OperandoFraction{this->numerator * other.denominator - this->denominator * other.numerator
-				, this->denominator * other.denominator};
+	OperandoFraction* returned = new OperandoFraction(this->numerator * other->denominator - this->denominator * other->numerator
+				, this->denominator * other->denominator);
+	return *returned;
 }
 
 OperandoFraction& OperandoFraction::operator*(Operando& oper)
 {
 	OperandoFraction* other = dynamic_cast<OperandoFraction*>(&oper);
-	return OperandoFraction{this->numerator * other.numerator
-				, this->denominator * other.denominator};
+	OperandoFraction* returned = new OperandoFraction(this->numerator * other->numerator
+				                , this->denominator * other->denominator);
+	return *returned;			    
 }
 
 OperandoFraction& OperandoFraction::operator/(Operando& oper)
 {
 	OperandoFraction* other = dynamic_cast<OperandoFraction*>(&oper);
-	return OperandoFraction{this->numerator * other.denominator
-					, this->denominator * other.numerator};
+	OperandoFraction* returned = new OperandoFraction(this->numerator * other->denominator
+					        , this->denominator * other->numerator);
+	return *returned;
 }
 
 void OperandoFraction::print()
