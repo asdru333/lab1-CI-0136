@@ -14,7 +14,7 @@ OperandoFraction::OperandoFraction(const long long numerator, const long long de
 OperandoFraction::OperandoFraction(std::string fraction) 
 {
 	if (!this->verifyStr(fraction))
-		std::cout << "El cadena que representa la fracción es invalida";
+		std::cout << "El cadena que representa la fracciÃ³n es invalida";
 }
 
 OperandoFraction& OperandoFraction::operator+(Operando& oper)
