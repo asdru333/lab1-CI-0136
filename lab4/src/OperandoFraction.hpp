@@ -1,6 +1,8 @@
 #ifndef FRACTION_H
 #define FRACTION_H
 
+#pragma once
+
 class OperandoFraction: public Operando
 {
 	private:
