@@ -1,7 +1,12 @@
-#ifndef FRACTION_H
-#define FRACTION_H
-
+#ifndef OPERANDOFRACTION_H
+#define OPERANDOFRACTION_H
 #pragma once
+
+#include <iostream>
+#include <cstdlib>
+#include <string>
+
+#include "Operando.hpp"
 
 class OperandoFraction: public Operando
 {
