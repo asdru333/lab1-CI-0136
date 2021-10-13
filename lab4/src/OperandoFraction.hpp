@@ -24,3 +24,4 @@ class OperandoFraction: public Operando
 		long long greatestCommonDivisor(long long numerator, long long denominator);
 		bool verifyStr(std::string fraction);
 };
+#endif
