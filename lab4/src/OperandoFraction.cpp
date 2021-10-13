@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <string>
 
-#include "OperandoFraction.h"
+#include "OperandoFraction.hpp"
 
 OperandoFraction::OperandoFraction(const long long numerator, const long long denominator)
 	: numerator{ numerator }
