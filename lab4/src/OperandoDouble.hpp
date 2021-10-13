@@ -2,6 +2,8 @@
 #define OPERANDODOUBLE_H
 #pragma once
 
+#include <string>
+
 #include "Operando.hpp"
 
 class OperandoDouble : public Operando {
@@ -9,7 +11,8 @@ class OperandoDouble : public Operando {
   double valor;
 
  public:
-  OperandoDouble(double valorInicial);
+  OperandoDouble(double);
+  OperandoDouble(std::string);
   ~OperandoDouble();
   double getValor();
   OperandoDouble& operator+(Operando& oper) override;

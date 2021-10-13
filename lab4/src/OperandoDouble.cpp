@@ -4,6 +4,10 @@ OperandoDouble::OperandoDouble(double valorInicial) {
   this->valor = valorInicial;
 }
 
+OperandoDouble::OperandoDouble(std::string valorInicial) {
+  this->valor = std::stod(valorInicial);
+}
+
 OperandoDouble::~OperandoDouble() {}
 
 double OperandoDouble::getValor() { return this->valor; }

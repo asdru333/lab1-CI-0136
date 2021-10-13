@@ -4,7 +4,7 @@
 
 int main() {
   OperandoDouble op1(1024.5);
-  OperandoDouble op2(256.5);
+  OperandoDouble op2("765.2");
   OperandoDouble res = op1 + op2;
   std::cout << "Suma: ";
   std::cout << res.getValor() << std::endl;
