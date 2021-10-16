@@ -15,6 +15,7 @@ class OperandoDouble : public Operando {
   OperandoDouble(std::string);
   ~OperandoDouble();
   double getValor();
+  std::string toString();
   OperandoDouble& operator+(Operando& oper) override;
   OperandoDouble& operator-(Operando& oper) override;
   OperandoDouble& operator/(Operando& oper) override;

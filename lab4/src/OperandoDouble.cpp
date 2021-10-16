@@ -12,6 +12,8 @@ OperandoDouble::~OperandoDouble() {}
 
 double OperandoDouble::getValor() { return this->valor; }
 
+std::string OperandoDouble::toString() { return std::to_string(this->valor); }
+
 OperandoDouble& OperandoDouble::operator+(Operando& oper) {
   OperandoDouble* operando = dynamic_cast<OperandoDouble*>(&oper);
   OperandoDouble* resultado = new OperandoDouble(0);

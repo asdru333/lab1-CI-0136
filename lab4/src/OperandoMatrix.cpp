@@ -1,5 +1,6 @@
 #include "OperandoMatrix.hpp"
 
+#include <iostream>
 #include <sstream>
 OperandoMatrix::OperandoMatrix() {}
 
@@ -39,9 +40,9 @@ OperandoMatrix &OperandoMatrix::operator+(Operando &oper) {
   vector<vector<int>> dataResultante;
   dataResultante = this->myData;
 
-  for (int filaIndex = 0; filaIndex < dataResultante.size(); filaIndex++) {
-    for (int columnaIndex = 0; columnaIndex < dataResultante[filaIndex].size();
-         ++columnaIndex) {
+  for (size_t filaIndex = 0; filaIndex < dataResultante.size(); filaIndex++) {
+    for (size_t columnaIndex = 0;
+         columnaIndex < dataResultante[filaIndex].size(); ++columnaIndex) {
       dataResultante[filaIndex][columnaIndex] =
           dataResultante[filaIndex][columnaIndex] +
           operando->getMyData()[filaIndex][columnaIndex];
@@ -55,9 +56,9 @@ OperandoMatrix &OperandoMatrix::operator-(Operando &oper) {
   vector<vector<int>> dataResultante;
   dataResultante = this->myData;
 
-  for (int filaIndex = 0; filaIndex < dataResultante.size(); filaIndex++) {
-    for (int columnaIndex = 0; columnaIndex < dataResultante[filaIndex].size();
-         ++columnaIndex) {
+  for (size_t filaIndex = 0; filaIndex < dataResultante.size(); filaIndex++) {
+    for (size_t columnaIndex = 0;
+         columnaIndex < dataResultante[filaIndex].size(); ++columnaIndex) {
       dataResultante[filaIndex][columnaIndex] =
           dataResultante[filaIndex][columnaIndex] -
           operando->getMyData()[filaIndex][columnaIndex];
@@ -68,15 +69,16 @@ OperandoMatrix &OperandoMatrix::operator-(Operando &oper) {
 }
 OperandoMatrix &OperandoMatrix::operator*(Operando &oper) {
   OperandoMatrix *operando = dynamic_cast<OperandoMatrix *>(&oper);
-
-  vector<vector<int>> dataResultante;
-
-  for (int filasMatriz1Index = 0; filasMatriz1Index < this->myData.size();
+  vector<vector<int>> dataResultante(this->myData.size());
+  for (size_t index = 0; index < dataResultante.size(); ++index) {
+    dataResultante[index].resize(operando->getMyData()[0].size());
+  }
+  for (size_t filasMatriz1Index = 0; filasMatriz1Index < this->myData.size();
        ++filasMatriz1Index)
-    for (int columnasMatrix2Index = 0;
+    for (size_t columnasMatrix2Index = 0;
          columnasMatrix2Index < operando->getMyData()[0].size();
          ++columnasMatrix2Index)
-      for (int columnasMatrix1Index = 0;
+      for (size_t columnasMatrix1Index = 0;
            columnasMatrix1Index < this->myData[0].size();
            ++columnasMatrix1Index) {
         dataResultante[filasMatriz1Index][columnasMatrix2Index] +=
@@ -86,13 +88,29 @@ OperandoMatrix &OperandoMatrix::operator*(Operando &oper) {
 
   return *new OperandoMatrix(dataResultante);
 }
+
+/**
+ * Multiplying the two matrix...
+    for(i=0; i<matOneRow; i++)
+    {
+        for(j=0; j<matTwoCol; j++)
+        {
+            sum = 0;
+            for(k=0; k<matOneCol; k++)
+                sum = sum + (matOne[i][k] * matTwo[k][j]);
+            matThree[i][j] = sum;
+ *
+ *
+ *
+ * */
+
 OperandoMatrix &OperandoMatrix::operator/(Operando &oper) { return *this; }
 
 string OperandoMatrix::toString() {
   stringstream streamOutput;
 
   for (auto &fila : this->myData) {
-    for (int numeroIndex = 0; numeroIndex < fila.size(); numeroIndex++) {
+    for (size_t numeroIndex = 0; numeroIndex < fila.size(); numeroIndex++) {
       streamOutput << fila[numeroIndex];
       if (numeroIndex != fila.size() - 1) {
         streamOutput << ',';
