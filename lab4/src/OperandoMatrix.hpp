@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Operando.hpp"
-using namespace std;
 
 class OperandoMatrix : public Operando {
  private:
@@ -20,12 +19,11 @@ class OperandoMatrix : public Operando {
   OperandoMatrix(std::vector<std::vector<int>> data);
 
   ~OperandoMatrix();
-  double getValor();
   OperandoMatrix& operator+(Operando& oper) override;
   OperandoMatrix& operator-(Operando& oper) override;
   OperandoMatrix& operator/(Operando& oper) override;
   OperandoMatrix& operator*(Operando& oper) override;
-  string toString();
+  std::string toString();
   std::vector<std::vector<int>> getMyData();
 };
 #endif
