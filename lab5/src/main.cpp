@@ -9,7 +9,11 @@ int main() {
   std::stringstream bitacora;
   Sesion *javier = new Sesion("Javier"), *charlie = new Sesion("Charlie"),
          *asdrubal = new Sesion("Asdrubal"), *pedro = new Sesion("Pedro");
-  Sesion* personas[] = {javier, charlie, asdrubal, pedro};
+  Sesion* personas[4];
+  personas[0] = javier;
+  personas[1] = charlie;
+  personas[2] = asdrubal;
+  personas[3] = pedro;
   Chat chatGeneral("CI-420"), compas("Compas");
   for (Sesion* sesion : personas) bitacora << chatGeneral.meterAlChat(sesion);
   bitacora << pedro->enviarBroadcast(chatGeneral,
