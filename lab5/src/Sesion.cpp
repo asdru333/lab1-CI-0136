@@ -9,13 +9,20 @@
 
 std::string Sesion::enviarBroadcast(Mediador& mediador,
                                     const std::string& mensaje) {
-  return mediador.difundirMensaje(this, mensaje);
+  std::stringstream sstream;	
+  sstream << this->getNombre() << " envio un mensaje broadcast\n" 
+    << mediador.difundirMensaje(this, mensaje);
+  return sstream.str();
 }
 
 std::string Sesion::enviarP2P(Mediador& mediador, const std::string& mensaje,
                               Colega& receptor) {
   Sesion* receptorPointer = dynamic_cast<Sesion*>(&receptor);
-  return mediador.difundirMensaje(this, mensaje, receptorPointer);
+  std::stringstream sstream;
+  sstream << this->getNombre() << " envio un mensaje p2p a " << 
+    receptor.getNombre() << "\n" << 
+    mediador.difundirMensaje(this, mensaje, receptorPointer);
+  return sstream.str();
 }
 
 std::string Sesion::recibirMensaje(Colega* sender, const std::string& mensaje) {
