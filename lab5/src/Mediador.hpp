@@ -5,22 +5,24 @@
 #ifndef LAB5_MEDIADOR_MEDIADOR_HPP
 #define LAB5_MEDIADOR_MEDIADOR_HPP
 
-
 #include <list>
 #include <vector>
+
 #include "Colega.hpp"
 
 class Mediador {
-private:
-    std::vector<Colega*> miembros;
-public:
-    const std::vector<Colega*>& getMiembros() const {return miembros;}
-    virtual void distributeMessage ( Colega* emisor, const  std::string&)  = 0;
-    virtual void distributeMessage ( Colega* emisor,const   std::string&, Colega* receptor)  = 0;
+ private:
+  std::vector<Colega*> miembros;
 
-    virtual void meterAlChat (Colega* colleague) {miembros.emplace_back (colleague);}
+ public:
+  std::vector<Colega*>& getMiembros() { return miembros; }
+  virtual void difundirMensaje(Colega* emisor, const std::string&) = 0;
+  virtual void difundirMensaje(Colega* emisor, const std::string&,
+                               Colega* receptor) = 0;
+
+  virtual void meterAlChat(Colega* colleague) {
+    miembros.emplace_back(colleague);
+  }
 };
 
-
-
-#endif //LAB5_MEDIADOR_MEDIADOR_HPP
+#endif  // LAB5_MEDIADOR_MEDIADOR_HPP
