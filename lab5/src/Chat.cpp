@@ -5,20 +5,21 @@
 #include "Chat.hpp"
 
 #include <iostream>
+#include <sstream>
 
 Chat::Chat(std::string elNombre) { this->nombre = elNombre; }
 
-std::string Chat::difundirMensaje(Colega *sender, const std::string &message) {
+std::string Chat::difundirMensaje(Colega *sender, const std::string &mensaje) {
   std::string bitacora = "";
   for (Colega *x : getMiembros())
-    if (x != sender) bitacora += x->recibirMensaje(sender, message);
+    if (x != sender) bitacora += x->recibirMensaje(sender, mensaje);
   return bitacora;
 }
 
-std::string Chat::difundirMensaje(Colega *emisor, const std::string &message,
+std::string Chat::difundirMensaje(Colega *emisor, const std::string &mensaje,
                                   Colega *receptor) {
   bool encontrado = false;
-  std::string bitacora;
+  std::stringstream bitacora;
   for (auto index : this->getMiembros()) {
     if (index == receptor) {
       encontrado = true;
@@ -27,11 +28,12 @@ std::string Chat::difundirMensaje(Colega *emisor, const std::string &message,
   }
 
   if (encontrado) {
-    bitacora = receptor->recibirMensaje(emisor, message);
+    bitacora << receptor->recibirMensaje(emisor, mensaje);
   } else {
-    bitacora = "Receptor no encontrado\n";
+    bitacora << "Receptor " << receptor->getNombre()
+             << " no se encuentra en este momento" << std::endl;
   }
-  return bitacora;
+  return bitacora.str();
 }
 
 std::string Chat::meterAlChat(Colega *elColega) {

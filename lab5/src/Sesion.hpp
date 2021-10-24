@@ -11,9 +11,9 @@
 class Sesion : public Colega {
  public:
   using Colega::Colega;
-  std::string enviarBroadcast(Mediador &mediator,
-                              const std::string &message) override;
-  std::string enviarP2P(Mediador &mediator, const std::string &message,
+  std::string enviarBroadcast(Mediador &mediador,
+                              const std::string &mensaje) override;
+  std::string enviarP2P(Mediador &mediador, const std::string &mensaje,
                         Colega &receptor) override;
   std::string recibirMensaje(Colega *, const std::string &) override;
 };

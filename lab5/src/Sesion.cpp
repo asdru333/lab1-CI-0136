@@ -7,20 +7,20 @@
 #include <iostream>
 #include <sstream>
 
-std::string Sesion::enviarBroadcast(Mediador& mediator,
-                                    const std::string& message) {
-  return mediator.difundirMensaje(this, message);
+std::string Sesion::enviarBroadcast(Mediador& mediador,
+                                    const std::string& mensaje) {
+  return mediador.difundirMensaje(this, mensaje);
 }
 
-std::string Sesion::enviarP2P(Mediador& mediator, const std::string& message,
+std::string Sesion::enviarP2P(Mediador& mediador, const std::string& mensaje,
                               Colega& receptor) {
   Sesion* receptorPointer = dynamic_cast<Sesion*>(&receptor);
-  return mediator.difundirMensaje(this, message, receptorPointer);
+  return mediador.difundirMensaje(this, mensaje, receptorPointer);
 }
 
-std::string Sesion::recibirMensaje(Colega* sender, const std::string& message) {
+std::string Sesion::recibirMensaje(Colega* sender, const std::string& mensaje) {
   std::stringstream sstream;
   sstream << getNombre() << " recibio un mensaje de " << sender->getNombre()
-          << ": " << message << std::endl;
+          << ": " << mensaje << std::endl;
   return sstream.str();
 }
