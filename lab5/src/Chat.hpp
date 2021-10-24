@@ -8,8 +8,15 @@
 #include "Mediador.hpp"
 
 class Chat : public Mediador {
-  void difundirMensaje(Colega*, const std::string&) override;
-  void difundirMensaje(Colega*, const std::string&, Colega* receptor) override;
+ private:
+  std::string nombre;
+
+ public:
+  Chat(std::string nombre);
+  std::string difundirMensaje(Colega*, const std::string&) override;
+  std::string difundirMensaje(Colega*, const std::string&,
+                              Colega* receptor) override;
+  std::string meterAlChat(Colega*) override;
 };
 
 #endif  // LAB5_MEDIADOR_CHAT_HPP

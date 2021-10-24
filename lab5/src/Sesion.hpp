@@ -11,10 +11,11 @@
 class Sesion : public Colega {
  public:
   using Colega::Colega;
-  void enviarBroadcast(Mediador &mediator, const std::string &message) override;
-  void enviarP2P(Mediador &mediator, const std::string &message,
-                 Colega &receptor) override;
-  void recibirMensaje(Colega *, const std::string &) override;
+  std::string enviarBroadcast(Mediador &mediator,
+                              const std::string &message) override;
+  std::string enviarP2P(Mediador &mediator, const std::string &message,
+                        Colega &receptor) override;
+  std::string recibirMensaje(Colega *, const std::string &) override;
 };
 
 #endif  // LAB5_MEDIADOR_SESION_HPP
