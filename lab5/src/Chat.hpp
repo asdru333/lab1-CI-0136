@@ -17,6 +17,7 @@ class Chat : public Mediador {
   std::string difundirMensaje(Colega*, const std::string&,
                               Colega* receptor) override;
   std::string meterAlChat(Colega*) override;
+  std::string sacarDelChat(Colega*) override;
 };
 
 #endif  // LAB5_MEDIADOR_CHAT_HPP

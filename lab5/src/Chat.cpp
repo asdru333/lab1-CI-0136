@@ -35,8 +35,21 @@ std::string Chat::difundirMensaje(Colega *emisor, const std::string &message,
 }
 
 std::string Chat::meterAlChat(Colega *elColega) {
-  this->getMiembros().emplace_back(elColega);
+  this->getMiembros().push_back(elColega);
   std::string bitacora = elColega->getNombre() += " entro al chat ";
+  bitacora += this->nombre;
+  bitacora += "\n";
+  return bitacora;
+}
+
+std::string Chat::sacarDelChat(Colega *elColega) {
+  for (std::vector<Colega *>::iterator it = this->getMiembros().begin();
+       it != this->getMiembros().end(); ++it) {
+    if (*it == elColega) {
+      this->getMiembros().erase(it);
+    }
+  }
+  std::string bitacora = elColega->getNombre() += " salio del chat ";
   bitacora += this->nombre;
   bitacora += "\n";
   return bitacora;

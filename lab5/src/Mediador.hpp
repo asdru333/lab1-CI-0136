@@ -20,7 +20,8 @@ class Mediador {
   virtual std::string difundirMensaje(Colega* emisor, const std::string&,
                                       Colega* receptor) = 0;
 
-  virtual std::string meterAlChat(Colega* colleague) = 0;
+  virtual std::string meterAlChat(Colega* elColega) = 0;
+  virtual std::string sacarDelChat(Colega* elColega) = 0;
 };
 
 #endif  // LAB5_MEDIADOR_MEDIADOR_HPP
